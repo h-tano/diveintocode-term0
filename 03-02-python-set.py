@@ -7,7 +7,7 @@ course_dict = {
 
 
 def find_person(want_to_find_person):
-    # 各コースで在籍判定および結果の表示を行う
+    #   各コースで在籍判定および結果の表示を行う
     if type(want_to_find_person) == set:
         want_to_find_person = set(want_to_find_person)
     else:
