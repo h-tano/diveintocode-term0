@@ -7,10 +7,8 @@ course_dict = {
 
 
 def find_person(want_to_find_person):
-    #辞書のキーを取得する
-    dic_list = list(course_dict.keys())
     #各コースで在籍判定および結果の表示を行う
-    for i in dic_list:
+    for i in course_dict.keys():
         #コースに探したい人が在籍しているか積を取って確認する
         result = course_dict[i] & want_to_find_person
         ##探したい人が何人在籍しているかを調べる
