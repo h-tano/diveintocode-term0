@@ -13,18 +13,19 @@ def find_person(want_to_find_person):
         result = course_dict[i] & want_to_find_person
         ##探したい人が何人在籍しているかを調べる
         number = len(result)
-        #探したい人の在籍人数が０人なら"〇〇さんは在籍していません"と表示する
+        # 探したい人の在籍人数が０人なら"〇〇さんは在籍していません"と表示する
         if number == 0:
-            print("{}に{}は在籍していません。".format(i,want_to_find_person))
-        #探したい人の在籍人数が１人なら"〇〇さんのみ在籍しています"と表示する
-        elif number == 1:
-            print("{}に{}のみ在籍しています。".format(i,result))
-        ##探したい人の在籍人数が2人以上なら"〇〇さんは在籍しています"と表示する
-        else :
-            print("{}に{}は在籍しています。".format(i,result))
+            print("{}に{}は在籍していません。".format(course_name, want_to_find_person))
+        # 探したい人の在籍人数が１人かつ探したい人の人数が複数名なら"〇〇さんのみ在籍しています"と表示する
+        elif number == 1 and len(want_to_find_person) > 1:
+            print("{}に{}のみ在籍しています。".format(course_name, result))
+        # 探したい人の在籍人数が2人以上なら"〇〇さんは在籍しています"と表示する
+        else:
+            print("{}に{}は在籍しています。".format(course_name, result))
+
 
 def main():
-    want_to_find_person = {'Cさん', 'Aさん'}
+    want_to_find_person = ['Cさん', 'Aさん']
     print('探したい人: {}'.format(want_to_find_person))
     find_person(want_to_find_person)
 
