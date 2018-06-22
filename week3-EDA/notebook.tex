@@ -1,0 +1,1275 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{EDA-4-porto-insights}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{EDA4}\label{eda4}
+
+    \section{Introduction}\label{introduction}
+
+This competition is hosted by the third largest insurance company in
+Brazil: \href{https://en.wikipedia.org/wiki/Porto_Seguro_S.A.}{Porto
+Seguro} with the task of predicting the \emph{probability that a driver
+will initiate an insurance claim in the next year.}
+
+This notebook will aim to provide some interactive charts and analysis
+of the competition data by way of the Python visualisation library
+Plot.ly and hopefully bring some insights and beautiful plots that
+others can take and replicate. Plot.ly is one of the main products
+offered by the software company - \href{https://plot.ly/}{Plotly} which
+specializes in providing online graphical and statistical visualisations
+(charts and dashboards) as well as providing an API to a whole rich
+suite of programming languages and tools such as Python, R, Matlab,
+Node.js etc.
+
+Listed below for easy convenience are links to the various Plotly plots
+in this notebook:
+
+\begin{itemize}
+\tightlist
+\item
+  Simple horizontal bar plot - Used to inspect the Target variable
+  distribution
+\item
+  Correlation Heatmap plot - Inspect the correlation between the
+  different features
+\item
+  Scatter plot - Compare the feature importances generated by Random
+  Forest and Gradient-Boosted model
+\item
+  Vertical bar plot - List in Descending order, the importance of the
+  various features
+\item
+  3D Scatter plot
+\end{itemize}
+
+The themes in this notebook can be briefly summarized follows:
+
+Section \ref{quality} - Visualising and evaluating all missing/Null
+values (values that are -1)
+
+\textbf{2. Feature inspection and filtering} - Correlation and feature
+Mutual information plots against the target variable. Inspection of the
+Binary, categorical and other variables.
+
+\textbf{3. Feature importance ranking via learning models} /n Building a
+Random Forest and Gradient Boosted model to help us rank features based
+off the learning process.
+
+Let's Go
+
+    導入\\
+この大会は、ブラジルの3番目に大きな保険会社、ポルト・セグロが主催し、来年に運転手が保険金請求を開始する可能性を予測するものです。
+
+このノートブックは、PythonビジュアライゼーションライブラリPlot.lyを使っていくつかのインタラクティブなチャートと競合データの分析を提供し、他の人が取ったり複製したりできるいくつかの洞察と美しいプロットをもたらすことを目指します。
+Plot.lyは、オンラインのグラフィカルおよび統計的な視覚化（チャートおよびダッシュボード）の提供を専門とするソフトウェア会社Plotlyが提供する主要製品の1つであり、Python、
+R、Matlab、Node.jsなど
+
+簡単な利便性のために、以下の表は、このノートブックのさまざまなPlotlyプロットへのリンクです：
+
+・単純な横棒グラフ - ターゲット変数の分布を検査するために使用されます\\
+・相関ヒートマッププロット - 異なるフィーチャ間の相関関係を検査する\\
+・散布図 -
+ランダムフォレストとグラデーションブーストモデルで生成されたフィーチャの高さを比較します。\\
+・縦棒グラフ - 降順のリスト、さまざまな機能の重要性\\
+・3D散布図
+
+このノートブックのテーマは以下のように簡単に要約できます：
+
+1.データ品質チェック - すべての欠損値/ヌル値（-1の値）の可視化と評価
+
+2.フィーチャの検査とフィルタリング -
+相関とフィーチャターゲット変数に対する相互情報のプロット。バイナリ、\\
+　カテゴリおよびその他の変数の検査。
+
+3.学習モデルによる特徴の重要度ランキング/
+n学習プロセスに基づいて特徴をランク付けするのに役立つランダム\\
+　フォレストとグラジエントブーストモデルを構築する。
+
+行こう
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} ライブラリをインポート}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{offline} \PY{k}{as} \PY{n+nn}{py}
+        \PY{n}{py}\PY{o}{.}\PY{n}{init\PYZus{}notebook\PYZus{}mode}\PY{p}{(}\PY{n}{connected}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{graph\PYZus{}objs} \PY{k}{as} \PY{n+nn}{go}
+        \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{tools} \PY{k}{as} \PY{n+nn}{tls}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{mutual\PYZus{}info\PYZus{}classif}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ignore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+UsageError: Line magic function `\%plotly` not found.
+
+    \end{Verbatim}
+
+    Let us load in the training data provided using Pandas:
+
+    Pandasを使用して提供されたトレーニングデータを読み込みましょう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}データを読み込む}
+        \PY{n}{train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./input/train.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}    id  target  ps\_ind\_01  ps\_ind\_02\_cat  ps\_ind\_03  ps\_ind\_04\_cat  \textbackslash{}
+        0   7       0          2              2          5              1   
+        1   9       0          1              1          7              0   
+        2  13       0          5              4          9              1   
+        3  16       0          0              1          2              0   
+        4  17       0          0              2          0              1   
+        
+           ps\_ind\_05\_cat  ps\_ind\_06\_bin  ps\_ind\_07\_bin  ps\_ind\_08\_bin       {\ldots}        \textbackslash{}
+        0              0              0              1              0       {\ldots}         
+        1              0              0              0              1       {\ldots}         
+        2              0              0              0              1       {\ldots}         
+        3              0              1              0              0       {\ldots}         
+        4              0              1              0              0       {\ldots}         
+        
+           ps\_calc\_11  ps\_calc\_12  ps\_calc\_13  ps\_calc\_14  ps\_calc\_15\_bin  \textbackslash{}
+        0           9           1           5           8               0   
+        1           3           1           1           9               0   
+        2           4           2           7           7               0   
+        3           2           2           4           9               0   
+        4           3           1           1           3               0   
+        
+           ps\_calc\_16\_bin  ps\_calc\_17\_bin  ps\_calc\_18\_bin  ps\_calc\_19\_bin  \textbackslash{}
+        0               1               1               0               0   
+        1               1               1               0               1   
+        2               1               1               0               1   
+        3               0               0               0               0   
+        4               0               0               1               1   
+        
+           ps\_calc\_20\_bin  
+        0               1  
+        1               0  
+        2               0  
+        3               0  
+        4               0  
+        
+        [5 rows x 59 columns]
+\end{Verbatim}
+            
+    ２値のデータ列がいくつかあるようだ、また、idは連番になっているわけではない
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} trainデータが何行何列であるか確認}
+        \PY{n}{rows} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{n}{columns} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{The train dataset contains }\PY{l+s+si}{\PYZob{}0\PYZcb{}}\PY{l+s+s2}{ rows and }\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s2}{ columns}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{columns}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The train dataset contains 595212 rows and 59 columns
+
+    \end{Verbatim}
+
+     \#\# 1. Data Quality checks
+
+\textbf{Null or missing values check}
+
+As part of our quality checks, let us quick look at whether there are
+any null values in the train dataset as follows:
+
+    1.データ品質チェック\\
+ヌル値または欠損値のチェック
+
+品質チェックの一環として、次のように訓練データセットにヌル値があるかどうかを素早く見てみましょう。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} tranデータの全ての列に対してにnull値がないかチェックする(最初のanyで行方向に結果がまとめられ、２個目のanyで列方向もまとめられて1つの値になる)}
+        \PY{n}{train}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} False
+\end{Verbatim}
+            
+    \begin{itemize}
+\tightlist
+\item
+  Our null values check returns False but however, this does not really
+  mean that this case has been closed as the data is also described as
+  \href{https://www.kaggle.com/c/porto-seguro-safe-driver-prediction/data}{"Values
+  of -1 indicate that the feature was missing from the observation"}.
+  Therefore I take it that Porto Seguro has simply conducted a blanket
+  replacement of all null values in the data with the value of -1. Let
+  us now inspect if there where any missing values in the data.
+\end{itemize}
+
+    ・私たちのヌル値チェックはFalseを返しますが、データが
+"-1の値は観測から欠落していることを示します"と記述されているため、このケースが閉じられたということを意味しません。
+したがって、ポルト・セグロは、データのすべてのヌル値を-1の値でブランケット置換しただけです。
+データの欠損値がどこにあるのか調べてみましょう。
+
+    Here we can see that which columns contained -1 in their values so we
+could easily for example make a blanket replacement of all -1 with nulls
+first as follows:
+
+    ここでは、どの列が値に-1を含んでいるかを見ることができます。たとえば、次のように、すべて-1のヌルを最初にブランケット置換することができます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}trainデータのコピーを作り、\PYZhy{}1をnanに置換する（今回のデータでは\PYZhy{}1はデータがないことを意味しているためnanに置き換える必要がある）}
+        \PY{n}{train\PYZus{}copy} \PY{o}{=} \PY{n}{train}
+        \PY{n}{train\PYZus{}copy} \PY{o}{=} \PY{n}{train\PYZus{}copy}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{NaN}\PY{p}{)}
+\end{Verbatim}
+
+
+    Next, we can use resident Kaggler's
+\href{https://www.kaggle.com/residentmario}{Aleksey Bilogur} - creator
+of the "Missingno" package which is a most useful and convenient tool in
+visualising missing values in the dataset, so check it out.
+
+    次に、データセットの欠損値を視覚化する上で最も有用で便利なツールである「Missingno」パッケージの作成者、KagglerのAleksey
+Bilogur氏を使用することができます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}どこに欠落データがあるかを可視化する（色が背景と同じ、つまり白い箇所が欠損データ、また、０列目と１列目は分析対象ではないため除外）}
+        \PY{k+kn}{import} \PY{n+nn}{missingno} \PY{k}{as} \PY{n+nn}{msno}
+        \PY{n}{msno}\PY{o}{.}\PY{n}{matrix}\PY{p}{(}\PY{n}{df}\PY{o}{=}\PY{n}{train\PYZus{}copy}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{39}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{0.42}\PY{p}{,} \PY{l+m+mf}{0.1}\PY{p}{,} \PY{l+m+mf}{0.05}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1081ddf60>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    特定の列に欠損データが多いことがわかる
+
+    As we can see, the missing values now become much more apparent and
+clear when we visualise it, where the empty white bands (data that is
+missing) superposed on the vertical dark red bands (non-missing data)
+reflect the nullity of the data in that particular column. In this
+instance, we can observe that there are 7 features out of the 59 total
+features (although as rightly pointed out by Justin Nafe in the comments
+section there are really a grand total of 13 columns with missing
+values) that actually contained null values. This is due to the fact
+that the missingno matrix plot can only comfortable fit in approximately
+40 odd features to one plot after which some columns may be excluded,
+and hence the remaining 5 null columns have been excluded. To visualize
+all nulls, try changing the figsize argument as well as tweaking how we
+slice the dataframe.
+
+For the 7 null columns that we are able to observe, they are hence
+listed here as follows:
+
+\textbf{ps\_ind\_05\_cat \textbar{} ps\_reg\_03 \textbar{}
+ps\_car\_03\_cat \textbar{} ps\_car\_05\_cat \textbar{} ps\_car\_07\_cat
+\textbar{} ps\_car\_09\_cat \textbar{} ps\_car\_14}
+
+Most of the missing values occur in the columns suffixed with \_cat. One
+should really take further note of the columns ps\_reg\_03,
+ps\_car\_03\_cat and ps\_car\_05\_cat. Evinced from the ratio of white
+to dark bands, it is very apparent that a big majority of values are
+missing from these 3 columns, and therefore a blanket replacement of -1
+for the nulls might not be a very good strategy.
+
+    わかるように、欠けている値は、視覚化すると明らかになります。空白の白いバンド（欠落しているデータ）は、縦の濃い赤いバンド（重複していないデータ）に重なってデータの無効を反映しますその特定の列に表示されます。この例では、59の全体の特徴のうち7つの特徴があることがわかります（コメントセクションのJustin
+Nafeが本当に指摘しているように、実際にヌル値を含む合計13列の値が欠落しています）。これは、不足しているマトリックス・プロットが約40個の奇数のフィーチャーに1つのプロットにしか快適に収まらず、その後いくつかの列が除外され、残りの5つのヌル列が除外されているためです。すべてのヌルを視覚化するには、データフレームをスライスする方法を調整するだけでなく、figsize引数を変更してみてください。
+
+私たちが見ることができる7つのヌル列については、以下のようにここにリストされています。
+
+ps\_ind\_05\_cat \textbar{} ps\_reg\_03 \textbar{} ps\_car\_03\_cat
+\textbar{} ps\_car\_05\_cat \textbar{} ps\_car\_07\_cat \textbar{}
+ps\_car\_09\_cat \textbar{} ps\_car\_14
+
+欠損値の大部分は、\_catで終わる列に現れます。実際にps\_reg\_03、ps\_car\_03\_cat、ps\_car\_05\_catという列にさらに注意する必要があります。白からダークのバンドの比率から明らかなように、これらの3つの列から値の大多数が欠落していることは非常に明白であり、したがって、ヌルの-1のブランケット置換は非常に良い戦略ではないかもしれません。
+
+    \textbf{Target variable inspection}
+
+Another standard check normally conducted on the data is with regards to
+our target variable, where in this case, the column is conveniently
+titled "target". The target value also comes by the moniker of
+class/label/correct answer and is used in supervised learning models
+along with the corresponding data that is given (in our case all our
+train data except the id column) to learn the function that best maps
+the data to our target in the hope that this learned function can
+generalize and predict well with new unseen data.
+
+    目標変数調査
+
+データ上で通常行われるもう1つの標準チェックは、この場合、列が便宜的に「ターゲット」と題されたターゲット変数に関するものです。
+目標値は、クラス/ラベル/正解のモニカによっても与えられ、与えられた対応するデータ（私たちの場合はid列以外のすべての列車データ）と共に教師あり学習モデルで使用され、最良のマップ
+この学習された特徴が新しい目に見えないデータでも一般化して予測できることを期待して、データをターゲットに送信します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} 　target列の可視化}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+                     \PY{n}{x} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                     \PY{n}{y} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{target}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                     \PY{n}{text}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distribution of target variable}\PY{l+s+s1}{\PYZsq{}}
+             \PY{p}{)}\PY{p}{]}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Target variable distribution}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{basic\PYZhy{}bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    traget列のデータは０、１の２値であり、０が圧倒的に多いことがわかる
+
+    Hmmn, the target variable is rather imbalanced so it might be something
+to keep in mind. An imbalanced target will prove quite
+
+    うーん、目標変数はむしろ不均衡なので、心に留めておくべきことかもしれません。
+不均衡な目標は、かなり証明されます。
+
+    \textbf{Datatype check}
+
+This check is carried out to see what kind of datatypes the train set is
+comprised of : integers or characters or floats just to gain a better
+overview of the data we were provided with. One trick to obtain counts
+of the unique types in a python sequence is to use the Counter method,
+when you import the \textbf{Collections} module as follows:
+
+    データ型チェック
+
+このチェックは、訓練セットがどのような種類のデータ型で構成されているかを確認するために実行されます。文字列または浮動小数点数は、提供されたデータのより良い概要を得るためにのみ使用されます。
+Pythonシーケンスで一意の型の数を取得する1つのトリックは、次のようにCollectionsモジュールをインポートするときにCounterメソッドを使用することです。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} Counterメソッドを用いて各データタイプが何個存在するかを確認する}
+         \PY{n}{Counter}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{dtypes}\PY{o}{.}\PY{n}{values}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} Counter(\{dtype('int64'): 49, dtype('float64'): 10\})
+\end{Verbatim}
+            
+    As alluded to above, there are a total of 59 columns that make up the
+train dataset and as we can observe from this check, the
+features/columns consist of only two datatypes - Integer and floats.
+
+Another point to note is that Porto Seguro has actually provided us data
+with headers that come suffixed with abbreviations such as "\_bin",
+"\_cat" and "\_reg", where they have given us a rough explanation that
+\_bin indicates binary features while \_cat indicates categorical
+features whilst the rest are either continuous or ordinal features. Here
+I shall simplify this a bit further just by looking at float values
+(probably only the continuous features) and integer datatypes (binary,
+categorical and ordinal features).
+
+    上記のようにtrainデータセットを構成する合計59の列があり、このチェックからわかるように、特徴/列は整数と浮動小数点の2つのデータ型のみで構成されています。
+
+Porto
+Seguroは実際には、\_bin、\_cat、\_regのような略語が末尾に付いたヘッダーをデータとして提供しています。\_catはバイナリ特徴を示し
+残りの部分は連続的または序数的な特徴のいずれかである。
+ここでは、浮動小数点数（たぶん連続特徴のみ）と整数データ型（バイナリ、カテゴリ、および序数特徴）を見るだけでこれをもう少し単純化します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} 特定のデータ型のデータだけを取得する}
+         \PY{n}{train\PYZus{}float} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{train\PYZus{}int} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{select\PYZus{}dtypes}\PY{p}{(}\PY{n}{include}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Correlation plots}\label{correlation-plots}
+
+As a starter, let us generate some linear correlation plots just to have
+a quick look at how a feature is linearly correlated to the next and
+perhaps start gaining some insights from here. At this juncture, I will
+use the seaborn statistical visualisation package to plot a heatmap of
+the correlation values. Conveniently, Pandas dataframes come with the
+corr() method inbuilt, which calculates the Pearson correlation. Also as
+convenient is Seaborn's way of invoking a correlation plot. Just
+literally the word "heatmap"
+
+\textbf{Correlation of float features}
+
+    相関プロット\\
+まず、フィーチャが次の特徴とどのように線形関係にあるかを素早く見て、ここからいくつかの洞察を得ることを開始するために、いくつかの線形相関プロットを生成してみましょう。
+ここでは、シーボーンの統計的視覚化パッケージを使用して、相関値のヒートマップをプロットします。
+便利なことに、Pandasのデータフレームには、Pearson相関を計算するcorr（）メソッドが組み込まれています。
+また、シーボーンの相関プロットの呼び出し方法も便利です。
+ちょうど文字通り言葉 "ヒートマップ"です
+
+浮動小数点機能の相関
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}float型のデータの列同士の相関を可視化する}
+         \PY{n}{colormap} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{magma}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pearson correlation of continuous features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{train\PYZus{}float}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{n}{linewidths}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{n}{vmax}\PY{o}{=}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} 
+                     \PY{n}{cmap}\PY{o}{=}\PY{n}{colormap}\PY{p}{,} \PY{n}{linecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x108191ba8>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    一部に0.５、0.６程度の正の相関がみられるが、ほとんどの列間で相関はない。
+
+    From the correlation plot, we can see that the majority of the features
+display zero or no correlation to one another. This is quite an
+interesting observation that will warrant our further investigation
+later down. For now, the paired features that display a positive linear
+correlation are listed as follows:
+
+\textbf{(ps\_reg\_01, ps\_reg\_03)}
+
+\textbf{(ps\_reg\_02, ps\_reg\_03)}
+
+\textbf{(ps\_car\_12, ps\_car\_13)}
+
+\textbf{(ps\_car\_13, ps\_car\_15)}
+
+    相関プロットから、大部分の特徴は互いにゼロまたは非相関を表示することがわかります。
+これは私たちのさらなる調査を後で保証することになる、非常に興味深い観察です。
+現時点では、正の線形相関を示す対の特徴が次のようにリストされています。
+
+    \textbf{Correlation of integer features}
+
+For the columns of interger datatype, I shall now switch to using the
+Plotly library to show how one can also generate a heatmap of
+correlation values interactively. Much like our earlier Plotly plot, we
+generate a heatmap object by simply invoking the "go.Heatmap". Here we
+have to provide values to three different axes, where x and y axes take
+in the column names while the correlation value is provided by the
+z-axis. The colorscale attribute takes in keywords that correspond to
+different color palettes that you will see in the heatmap where in this
+example, I have used the Greys colorscale (others include Portland and
+Viridis - try it for yourself).
+
+    整数特徴の相関
+
+intergerデータ型の列については、Plotlyライブラリを使用して、相関値のヒートマップをインタラクティブに生成する方法を示します。以前のPlotlyプロットと同様に、単に
+"go.Heatmap"を呼び出すことでヒートマップオブジェクトを生成します。
+ここでは、3つの異なる軸に値を入力する必要があります。ここで、x軸とy軸は列名を取り込み、相関値はz軸で与えられます。
+colorscale属性は、ヒートマップに表示されるさまざまなカラーパレットに対応するキーワードを取ります。この例では、私はGraysのカラースケールを使用しています（他のものにはPortlandとViridisが含まれます）。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} int型のデータ列同士の相関関係を可視化する}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}
+             \PY{n}{go}\PY{o}{.}\PY{n}{Heatmap}\PY{p}{(}
+                 \PY{n}{z}\PY{o}{=} \PY{n}{train\PYZus{}int}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                 \PY{n}{x}\PY{o}{=}\PY{n}{train\PYZus{}int}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                 \PY{n}{y}\PY{o}{=}\PY{n}{train\PYZus{}int}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                 \PY{n}{colorscale}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{reversescale} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{text} \PY{o}{=} \PY{k+kc}{True} \PY{p}{,}
+                 \PY{n}{opacity} \PY{o}{=} \PY{l+m+mf}{1.0} \PY{p}{)}
+         \PY{p}{]}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pearson Correlation of Integer\PYZhy{}type features}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{xaxis} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{ticks}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{nticks}\PY{o}{=}\PY{l+m+mi}{36}\PY{p}{)}\PY{p}{,}
+             \PY{n}{yaxis} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n}{ticks}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}\PY{p}{,}
+             \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{700}\PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{labelled\PYZhy{}heatmap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    ほとんどの列間で相関はない、ごく一部に強い正の相関、または、負の相関が見られる\\
+（ピアソン相関係数は単純な線形関係の場合にしか正しい値が出ないため参考程度に捉える）
+
+    Similarly, we can observe that there are a huge number of columns that
+are not linearly correlated with each other at all, evident from the
+fact that we observe quite a lot of 0 value cells in our correlation
+plot. This is quite a useful observation to us, especially if we are
+trying to perform dimensionality reduction transformations such as
+Principal Component Analysis (PCA), this would require a certain degree
+of correlation . We can note some features of interest are as follows:
+
+\textbf{\emph{Negatively correlated features}} : ps\_ind\_06\_bin,
+ps\_ind\_07\_bin, ps\_ind\_08\_bin, ps\_ind\_09\_bin
+
+One interesting aspect to note is that in our earlier analysis on
+nullity, ps\_car\_03\_cat and ps\_car\_05\_cat were found to contain
+many missing or null values. Therefore it should come as no surprise
+that both these features show quite a strong positive linear correlation
+to each other on this basis, albeit one that may not really reflect the
+underlying truth for the data.
+
+    同様に、相関プロットでは0の値のセルが非常に多く観測されていることから、直線的に相関しない膨大な数の列が存在することがわかります。特に、主成分分析（PCA）などの次元削減変換を実行しようとしている場合は、ある程度の相関が必要です。
+興味のある特徴は次のとおりです。
+
+負の相関特徴：ps\_ind\_06\_bin、ps\_ind\_07\_bin、ps\_ind\_08\_bin、ps\_ind\_09\_bin
+
+注目すべき興味深いところは、私たちの初期のヌル性解析では、ps\_car\_03\_catとps\_car\_05\_catに多くの欠損値またはヌル値が含まれていることが分かりました。
+したがって、これらの両方の特徴が、データの根底にある真理を実際に反映していないかもしれないにもかかわらず、この基準で互いに強い正の線形相関を示すことは驚くべきことではありません。
+
+    \subsection{Mutual Information plots}\label{mutual-information-plots}
+
+Mutual information is another useful tool as it allows one to inspect
+the mutual information between the target variable and the corresponding
+feature it is calculated against. For classification problems, we can
+conveniently call Sklearn's mutual\_info\_classif method which measures
+the dependency between two random variables and ranges from zero (where
+the random variables are independent of each other) to higher values
+(indicate some dependency). This therefore will help give us an idea of
+how much information from the target may be contained within the
+features.
+
+The sklearn implementation of the mutual\_info\_classif function tells
+us that it "relies on nonparametric methods based on entropy estimation
+from k-nearest neighbors distances", where you can go into more detail
+on the official sklearn page in the
+\href{http://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.mutual_info_classif.html\#sklearn.feature_selection.mutual_info_classif}{link
+here}.
+
+    相互情報量プロット\\
+相互情報は、ターゲット変数とそれに対して計算される対応する特徴との間の相互情報を調査することを可能にするもう1つの有用なツールである。分類問題では、Sklearnのmutual\_info\_classifメソッドを呼び出すことで、2つの確率変数間の依存関係を測定し、ゼロ（ランダム変数が互いに独立している）からより高い値（依存関係を示す）までの範囲で簡単に呼び出すことができます。
+これは、ターゲットからのどのくらいの情報が特徴内に含まれるのかを私たちに知らせるのに役立ちます。
+
+mutual\_info\_classif関数のsklearnの実装は、k-nearest neighbors
+distanceからのエントロピー推定に基づくノンパラメトリックな手法に依存していることを示しています。ここではリンクの公式sklearnページを詳しく見ることができます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c+c1}{\PYZsh{} float型の特徴とtarget変数との間の相互情報量を計算する}
+         \PY{n}{mf} \PY{o}{=} \PY{n}{mutual\PYZus{}info\PYZus{}classif}\PY{p}{(}\PY{n}{train\PYZus{}float}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{n}{train}\PY{o}{.}\PY{n}{target}\PY{o}{.}\PY{n}{values}\PY{p}{,}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{17} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{mf}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[0.01402035 0.00431986 0.0055185  0.00778454 0.00157233 0.00197537
+ 0.01226    0.00553038 0.00545101 0.00562139]
+
+    \end{Verbatim}
+
+    traget変数と強い依存関係にある変数はないようだ
+
+    \subsection{Binary features
+inspection}\label{binary-features-inspection}
+
+Another aspect of the data that we may want to inspect would be the
+columns that only contain binary values, i.e where values take on only
+either of the two values 1 or 0. Proceeding, we store all columns that
+contain these binary values and then generate a vertical plotly barplot
+of these binary values as follows:
+
+    バイナリ特徴調査\\
+検査する可能性のあるデータの別の側面は、バイナリ値のみを含む列です。つまり、値が1または0の2つの値のどちらか一方しか取ることはありません。先に、これらのバイナリ値を含むすべての列を格納し、
+これらのバイナリ値の垂直プロットバープロットは次のようになります。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} 列名に\PYZus{}binがつく列は２値のデータである。それらの０と１の各々の個数を数える}
+        \PY{n}{bin\PYZus{}col} \PY{o}{=} \PY{p}{[}\PY{n}{col} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{train}\PY{o}{.}\PY{n}{columns} \PY{k}{if} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}bin}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{col}\PY{p}{]}
+        \PY{n}{zero\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{one\PYZus{}list} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{bin\PYZus{}col}\PY{p}{:}
+            \PY{n}{zero\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{n}{one\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{c+c1}{\PYZsh{}  カウントした数を1つのバーで表示することで割合が分かるようにする}
+         \PY{n}{trace1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{bin\PYZus{}col}\PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{zero\PYZus{}list} \PY{p}{,}
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Zero count}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{bin\PYZus{}col}\PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{one\PYZus{}list}\PY{p}{,}
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{One count}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{trace1}\PY{p}{,} \PY{n}{trace2}\PY{p}{]}
+         \PY{n}{layout} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{barmode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stack}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count of 1 and 0 in binary variables}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{)}
+         
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stacked\PYZhy{}bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    全体的に０が過半数を占める列が多い、特にps\_ind\_10からps\_ind\_13はほぼ０で占められている
+
+    Here we observe that there are 4 features : ps\_ind\_10\_bin,
+ps\_ind\_11\_bin, ps\_ind\_12\_bin, ps\_ind\_13\_bin which are
+completely dominated by zeros. This begs the question of whether these
+features are useful at all as they do not contain much information about
+the other class vis-a-vis the target.
+
+    ここでは、ps\_ind\_10\_bin、ps\_ind\_11\_bin、ps\_ind\_12\_bin、ps\_ind\_13\_binの4つの特徴が存在することがわかります。\\
+ps\_ind\_10\_binは完全にゼロによって支配されています。
+これは、ターゲットに対する他のクラスに関する多くの情報を含んでいないので、\\
+これらの特徴がまったく有用であるかどうかという問題を招きます。
+
+    \subsection{Categorical and Ordinal feature
+inspection}\label{categorical-and-ordinal-feature-inspection}
+
+Let us first take a look at the features that are termed categorical as
+per their suffix "\_cat".
+
+    カテゴリと序列の調査\\
+最初に、接尾辞 "\_cat"のようにカテゴリに分類される特徴を見てみましょう。
+
+    \subsection{Feature importance via Random
+Forest}\label{feature-importance-via-random-forest}
+
+Let us now implement a Random Forest model where we fit the training
+data with a Random Forest Classifier and look at the ranking of the
+features after the model has finished training. This is a quick way of
+using an ensemble model (ensemble of weak decision tree learners applied
+under Bootstrap aggregated) which does not require much parameter tuning
+in obtaining useful feature importances and is also pretty robust to
+target imbalances. We call the Random Forest as follows:
+
+    ランダムフォレストによる特徴重要度\\
+ここではランダムフォレストモデルを実装し、ランダムフォレストクラシファイアとトレーニングデータをfitさせ、モデルがトレーニングを終えた後の特徴のランキングを見てみましょう。
+これは、有用な特徴の重要度を取得する際に多くのパラメータ調整を必要とせず、ターゲットの不均衡に対してかなり堅牢なアンサンブルモデル（Bootstrap集約下で適用された弱意思決定ツリー学習器のアンサンブル）を使用する迅速な方法です。
+私たちはランダムフォレストを以下のように呼んでいます：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+         \PY{n}{rf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{150}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{n}{rf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{target}\PY{p}{)}
+         \PY{n}{features} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Training Done \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+----- Training Done -----
+
+    \end{Verbatim}
+
+    \textbf{Plot.ly Scatter Plot of feature importances}
+
+Having trained the Random Forest, we can obtain the list of feature
+importances by invoking the attribute "feature\_importances\_" and plot
+our next Plotly plot, the Scatter plot.
+
+Here we invoke the command Scatter and as per the previous Plotly plots,
+we have to define our y and x-axes. However the one thing that we pay
+attention to in scatter plots is the marker attribute. It is the marker
+attribute where we define and hence control the size, color and scale of
+the scatter points embedded.
+
+    特徴重要度のPlot.ly散布図
+
+ランダムフォレストを訓練した後、属性「featureimportances」を呼び出して次のPlotlyプロット、散布図をプロットして、特徴のインポートのリストを取得できます。
+
+ここでは、Scatterコマンドを呼び出し、前のPlotlyプロットと同様に、y軸とx軸を定義する必要があります。
+しかし、散布図に注意を払うのはマーカー属性です。
+埋め込まれた散布点のサイズ、色、スケールを定義し、それによって制御するのはマーカー属性です。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{c+c1}{\PYZsh{} 各特徴の重要度の散布図を作成する}
+         \PY{n}{trace} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}
+             \PY{n}{y} \PY{o}{=} \PY{n}{rf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}
+             \PY{n}{x} \PY{o}{=} \PY{n}{features}\PY{p}{,}
+             \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{markers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{sizemode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diameter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{sizeref} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{,}
+                 \PY{n}{color} \PY{o}{=} \PY{n}{rf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}
+                 \PY{n}{colorscale}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Portland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{showscale}\PY{o}{=}\PY{k+kc}{True}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{text} \PY{o}{=} \PY{n}{features}
+         \PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{trace}\PY{p}{]}
+         
+         \PY{n}{layout}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{autosize}\PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forest Feature Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{hovermode}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{closest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{xaxis}\PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                  \PY{n}{ticklen}\PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+                  \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{zeroline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showline}\PY{o}{=}\PY{k+kc}{False}
+              \PY{p}{)}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{ticklen}\PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+                 \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{zeroline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{gridwidth}\PY{o}{=} \PY{l+m+mi}{2}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{showlegend}\PY{o}{=} \PY{k+kc}{False}
+         \PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,}\PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter2010}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    ps\_car\_13の重要度が突出している
+
+    Furthermore we could also display a sorted list of all the features
+ranked by order of their importance, from highest to lowest via the same
+plotly barplots as follows:
+
+    さらに、重要度の高い順にランク付けされたすべての特徴のソートされたリストを、次のような同じプロットの棒グラフを使用して最高から最低まで表示することもできます。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c+c1}{\PYZsh{} 各特徴の重要度を降順に表示する}
+         \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{rf}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{features}\PY{p}{)}\PY{p}{,} 
+                                                                     \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{x} \PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}
+             \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{color}\PY{o}{=}\PY{n}{x}\PY{p}{,}
+                 \PY{n}{colorscale} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{reversescale} \PY{o}{=} \PY{k+kc}{True}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Random Forest Feature importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{orientation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{p}{)}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Barplot of Feature importances}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showticklabels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+             \PY{p}{)}
+         \PY{p}{)}
+         
+         \PY{n}{fig1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{p}{[}\PY{n}{trace2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fig1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig1}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    \textbf{Decision Tree visualisation}
+
+One other interesting trick or technique oft used would be to visualize
+the tree branches or decisions made by the model. For simplicity, I fit
+a decision tree (of max\_depth = 3) and hence you only see 3 levels in
+the decision branch, use the export to graph visualization attribute in
+sklearn "export\_graphviz" and then export and import the tree image for
+visualization in this notebook.
+
+    決定木の視覚化
+
+他の興味深いトリックやテクニックの1つは、モデルによって作られた木の枝や決定を視覚化することです。
+簡単にするために、私は決定木（max\_depth =
+3）に合わせている、そのため決定ブランチで3つのレベルしか見ることができず、エクスポートをsklearn
+"export\_graphviz"の可視化属性におけるグラフ視覚化属性に使用し、それからグラフに視覚化のための木のイメージをエクスポートしてからこのノートにインポートする。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{c+c1}{\PYZsh{} 決定木を作成し、それを一旦dotファイルで出力し、そのあと、pngに変換してから表示させる}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{tree}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image} \PY{k}{as} \PY{n}{PImage}
+         \PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k}{import} \PY{n}{check\PYZus{}call}
+         \PY{k+kn}{from} \PY{n+nn}{PIL} \PY{k}{import} \PY{n}{Image}\PY{p}{,} \PY{n}{ImageDraw}\PY{p}{,} \PY{n}{ImageFont}
+         \PY{k+kn}{import} \PY{n+nn}{re}
+         
+         \PY{n}{decision\PYZus{}tree} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{decision\PYZus{}tree}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{target}\PY{p}{)}
+         
+         
+         \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tree1.dot}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+              \PY{n}{f} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{export\PYZus{}graphviz}\PY{p}{(}\PY{n}{decision\PYZus{}tree}\PY{p}{,}
+                                       \PY{n}{out\PYZus{}file}\PY{o}{=}\PY{n}{f}\PY{p}{,}
+                                       \PY{n}{max\PYZus{}depth} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,}
+                                       \PY{n}{impurity} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}
+                                       \PY{n}{feature\PYZus{}names} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}\PY{p}{,}
+                                       \PY{n}{class\PYZus{}names} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{No}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Yes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                       \PY{n}{rounded} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                                       \PY{n}{filled}\PY{o}{=} \PY{k+kc}{True} \PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{}Convert .dot to .png to allow display in web notebook}
+         \PY{c+c1}{\PYZsh{} check\PYZus{}call([\PYZsq{}dot\PYZsq{},\PYZsq{}\PYZhy{}Tpng\PYZsq{},\PYZsq{}tree1.dot\PYZsq{},\PYZsq{}\PYZhy{}o\PYZsq{},\PYZsq{}tree1.png\PYZsq{}])}
+         \PY{n}{check\PYZus{}call}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}Tpng}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tree1.dot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tree1.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Annotating chart with PIL}
+         \PY{n}{img} \PY{o}{=} \PY{n}{Image}\PY{o}{.}\PY{n}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tree1.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{draw} \PY{o}{=} \PY{n}{ImageDraw}\PY{o}{.}\PY{n}{Draw}\PY{p}{(}\PY{n}{img}\PY{p}{)}
+         \PY{n}{img}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sample\PYZhy{}out.png}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{PImage}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{sample\PYZhy{}out.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}62}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_72_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \subsection{Feature importance via Gradient Boosting
+model}\label{feature-importance-via-gradient-boosting-model}
+
+Just for curiosity, let us try another learning method in getting our
+feature importances. This time, we use a Gradient Boosting classifier to
+fit to the training data . Gradient Boosting proceeds in a forward
+stage-wise fashion, where at each stage regression tress are fitted on
+the gradient of the loss function (which defaults to the deviance in
+Sklearn implementation).
+
+    Gradient Boostingモデルによる特徴重要度¶\\
+好奇心のために、我々は特徴重要度を得るために別の学習方法を試してみましょう。
+今回は、Gradient
+Boosting分類器を使用してトレーニングデータにfitさせます。 Gradient
+Boostingは、各ステージで回帰ツリーが損失関数の傾き（Sklearnの実装ではずれがデフォルト値である）に対してfitされる、段階的な方法で進行します。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} sklearnの勾配ブースティング分類器を用いて特徴重要度を求める}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{GradientBoostingClassifier}
+         \PY{c+c1}{\PYZsh{} インスタンス作成}
+         \PY{n}{gb} \PY{o}{=} \PY{n}{GradientBoostingClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}leaf}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{max\PYZus{}features}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 学習実施}
+         \PY{n}{gb}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{train}\PY{o}{.}\PY{n}{target}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} id列とtarget列を削除したあとの列名を取得する}
+         \PY{n}{features} \PY{o}{=} \PY{n}{train}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{target}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{values}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{features}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{} Training Done \PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['ps\_ind\_01' 'ps\_ind\_02\_cat' 'ps\_ind\_03' 'ps\_ind\_04\_cat' 'ps\_ind\_05\_cat'
+ 'ps\_ind\_06\_bin' 'ps\_ind\_07\_bin' 'ps\_ind\_08\_bin' 'ps\_ind\_09\_bin'
+ 'ps\_ind\_10\_bin' 'ps\_ind\_11\_bin' 'ps\_ind\_12\_bin' 'ps\_ind\_13\_bin'
+ 'ps\_ind\_14' 'ps\_ind\_15' 'ps\_ind\_16\_bin' 'ps\_ind\_17\_bin' 'ps\_ind\_18\_bin'
+ 'ps\_reg\_01' 'ps\_reg\_02' 'ps\_reg\_03' 'ps\_car\_01\_cat' 'ps\_car\_02\_cat'
+ 'ps\_car\_03\_cat' 'ps\_car\_04\_cat' 'ps\_car\_05\_cat' 'ps\_car\_06\_cat'
+ 'ps\_car\_07\_cat' 'ps\_car\_08\_cat' 'ps\_car\_09\_cat' 'ps\_car\_10\_cat'
+ 'ps\_car\_11\_cat' 'ps\_car\_11' 'ps\_car\_12' 'ps\_car\_13' 'ps\_car\_14'
+ 'ps\_car\_15' 'ps\_calc\_01' 'ps\_calc\_02' 'ps\_calc\_03' 'ps\_calc\_04'
+ 'ps\_calc\_05' 'ps\_calc\_06' 'ps\_calc\_07' 'ps\_calc\_08' 'ps\_calc\_09'
+ 'ps\_calc\_10' 'ps\_calc\_11' 'ps\_calc\_12' 'ps\_calc\_13' 'ps\_calc\_14'
+ 'ps\_calc\_15\_bin' 'ps\_calc\_16\_bin' 'ps\_calc\_17\_bin' 'ps\_calc\_18\_bin'
+ 'ps\_calc\_19\_bin' 'ps\_calc\_20\_bin']
+----- Training Done -----
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} 各特徴の重要度の散布図を作成する}
+         \PY{n}{trace} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Scatter}\PY{p}{(}
+             \PY{n}{y} \PY{o}{=} \PY{n}{gb}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}
+             \PY{n}{x} \PY{o}{=} \PY{n}{features}\PY{p}{,}
+             \PY{n}{mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{markers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{sizemode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{diameter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{sizeref} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,}
+                 \PY{n}{size} \PY{o}{=} \PY{l+m+mi}{13}\PY{p}{,}
+                 \PY{n}{color} \PY{o}{=} \PY{n}{gb}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}
+                 \PY{n}{colorscale}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Portland}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{showscale}\PY{o}{=}\PY{k+kc}{True}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{text} \PY{o}{=} \PY{n}{features}
+         \PY{p}{)}
+         \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{n}{trace}\PY{p}{]}
+         
+         \PY{n}{layout}\PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Layout}\PY{p}{(}
+             \PY{n}{autosize}\PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+             \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gradient Boosting Machine Feature Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{hovermode}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{closest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{xaxis}\PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+                  \PY{n}{ticklen}\PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+                  \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{zeroline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showline}\PY{o}{=}\PY{k+kc}{False}
+              \PY{p}{)}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{title}\PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Feature Importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{zeroline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{ticklen}\PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,}
+                 \PY{n}{gridwidth}\PY{o}{=} \PY{l+m+mi}{2}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{showlegend}\PY{o}{=} \PY{k+kc}{False}
+         \PY{p}{)}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{data}\PY{p}{,} \PY{n}{layout}\PY{o}{=}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig}\PY{p}{,}\PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter2010}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    ps\_car\_13に加えて、ps\_ind\_03の重要度が高い結果となっている
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{}重要度が高い順に水平バープロットで表示する}
+         \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n+nb}{sorted}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n}{gb}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,} \PY{n}{features}\PY{p}{)}\PY{p}{,} 
+                                                                     \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{trace2} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Bar}\PY{p}{(}
+             \PY{n}{x}\PY{o}{=}\PY{n}{x} \PY{p}{,}
+             \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,}
+             \PY{n}{marker}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{color}\PY{o}{=}\PY{n}{x}\PY{p}{,}
+                 \PY{n}{colorscale} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{reversescale} \PY{o}{=} \PY{k+kc}{True}
+             \PY{p}{)}\PY{p}{,}
+             \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gradient Boosting Classifer Feature importance}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{n}{orientation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{h}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+         \PY{p}{)}
+         
+         \PY{n}{layout} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}
+             \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Barplot of Feature importances}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+              \PY{n}{width} \PY{o}{=} \PY{l+m+mi}{900}\PY{p}{,} \PY{n}{height} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,}
+             \PY{n}{yaxis}\PY{o}{=}\PY{n+nb}{dict}\PY{p}{(}
+                 \PY{n}{showgrid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showline}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                 \PY{n}{showticklabels}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+             \PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{fig1} \PY{o}{=} \PY{n}{go}\PY{o}{.}\PY{n}{Figure}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{p}{[}\PY{n}{trace2}\PY{p}{]}\PY{p}{)}
+         \PY{n}{fig1}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{layout}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{layout}\PY{p}{)}
+         \PY{n}{py}\PY{o}{.}\PY{n}{iplot}\PY{p}{(}\PY{n}{fig1}\PY{p}{,} \PY{n}{filename}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plots}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Interestingly we observe that in both Random forest and Gradient Boosted
+learning models, the most important feature that both models picked out
+was the column : \textbf{ps\_car\_13}.
+
+This particular feature warrants further investigation so let us conduct
+a deep-dive into it.
+
+    興味深いことに、ランダムフォレストとグラジエントブースト学習モデルの両方で、両方のモデルが選んだ最も重要な\\
+特徴は、列：ps\_car\_13でした。
+
+この特定の特徴は詳細な調査を必要とするため、深く掘り下げて検討してください。
+
+    \section{Conclusion}\label{conclusion}
+
+We have performed quite an extensive inspection of the Porto Seguro
+dataset by inspecting for null values and data quality, investigated
+linear correlations between features, inspected some of the feature
+distributions as well as implemented a couple of learning models (Random
+forest and Gradient Boosting classifier) so as to identify features that
+the models deemed important.
+
+    結論\\
+我々は、ヌル値とデータ品質を検査し、フィーチャ間の線形相関を調べ、フィーチャ分布のいくつかを検査し、\\
+いくつかの学習モデル（ランダムフォレストとグラジエントブースト分類器）をモデルが重要と考える特徴を確認するために実装して、\\
+Porto Seguroデータセットのかなりの検査を行いました。
+
+    \section{\texorpdfstring{\emph{To Be
+Continued..}}{To Be Continued..}}\label{to-be-continued..}
+
+    つづく
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
